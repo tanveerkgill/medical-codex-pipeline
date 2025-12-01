@@ -1,0 +1,21 @@
+2025-12-01 15:18:06,508 - INFO - root - ============================================================
+2025-12-01 15:18:06,509 - INFO - root - Starting LOINC processor
+2025-12-01 15:18:06,509 - INFO - root - ============================================================
+2025-12-01 15:18:06,509 - INFO - root - 🔍 Checking file: /Users/tanveerkaur/medical-codexes-pipline/input/loinc_sample.csv
+2025-12-01 15:18:06,509 - INFO - root -    Absolute path: /Users/tanveerkaur/medical-codexes-pipline/input/loinc_sample.csv
+2025-12-01 15:18:06,509 - INFO - root -    File exists: True
+2025-12-01 15:18:06,509 - INFO - root - 🌐 Attempting online download first: /Users/tanveerkaur/medical-codexes-pipline/input/loinc_sample.csv
+2025-12-01 15:18:06,509 - INFO - root -    Source: HARDCODED URL
+2025-12-01 15:18:06,509 - INFO - root -    URL: https://loinc.org/downloads/loinc-table/loinc-table.zip
+2025-12-01 15:18:06,509 - INFO - root -    Download attempt 1/3...
+2025-12-01 15:18:06,973 - WARNING - root -    Download attempt 1 failed: 503 Server Error: Service Unavailable for url: https://loinc.org/downloads/loinc-table/loinc-table.zip
+2025-12-01 15:18:06,974 - INFO - root -    Download attempt 2/3...
+2025-12-01 15:18:07,213 - WARNING - root -    Download attempt 2 failed: 503 Server Error: Service Unavailable for url: https://loinc.org/downloads/loinc-table/loinc-table.zip
+2025-12-01 15:18:07,213 - INFO - root -    Download attempt 3/3...
+2025-12-01 15:18:07,469 - WARNING - root -    Download attempt 3 failed: 503 Server Error: Service Unavailable for url: https://loinc.org/downloads/loinc-table/loinc-table.zip
+2025-12-01 15:18:07,469 - WARNING - root - ❌ ONLINE DOWNLOAD FAILED - All download attempts exhausted
+2025-12-01 15:18:07,469 - WARNING - root -    Last error: 503 Server Error: Service Unavailable for url: https://loinc.org/downloads/loinc-table/loinc-table.zip
+2025-12-01 15:18:07,469 - INFO - root -    Falling back to local file check...
+2025-12-01 15:18:07,470 - INFO - root - 🔍 Final check - File exists: True
+2025-12-01 15:18:07,470 - INFO - root - 📁 Using local file: /Users/tanveerkaur/medical-codexes-pipline/input/loinc_sample.csv
+2025-12-01 15:18:07,470 - INFO - root -    Source: LOCAL FILE (online download failed or unavailable)

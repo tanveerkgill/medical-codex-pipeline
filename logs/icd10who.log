@@ -1,0 +1,21 @@
+2025-12-01 15:17:57,472 - INFO - root - ============================================================
+2025-12-01 15:17:57,472 - INFO - root - Starting ICD-10 WHO processor
+2025-12-01 15:17:57,472 - INFO - root - ============================================================
+2025-12-01 15:17:58,104 - INFO - root - 🔍 Checking file: /Users/tanveerkaur/medical-codexes-pipline/input/icd10who_codes_2024.csv
+2025-12-01 15:17:58,105 - INFO - root -    Absolute path: /Users/tanveerkaur/medical-codexes-pipline/input/icd10who_codes_2024.csv
+2025-12-01 15:17:58,106 - INFO - root -    File exists: True
+2025-12-01 15:17:58,106 - INFO - root - 🌐 Attempting online download first: /Users/tanveerkaur/medical-codexes-pipline/input/icd10who_codes_2024.csv
+2025-12-01 15:17:58,107 - INFO - root -    Source: HARDCODED URL
+2025-12-01 15:17:58,107 - INFO - root -    URL: https://icd.who.int/browse10/2025/en/Download/GetICD10CSV
+2025-12-01 15:17:58,107 - INFO - root -    Download attempt 1/3...
+2025-12-01 15:17:58,388 - WARNING - root -    Download attempt 1 failed: HTTPSConnectionPool(host='icd.who.int', port=443): Max retries exceeded with url: /browse10/2025/en/Download/GetICD10CSV (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1077)')))
+2025-12-01 15:17:58,389 - INFO - root -    Download attempt 2/3...
+2025-12-01 15:17:58,622 - WARNING - root -    Download attempt 2 failed: HTTPSConnectionPool(host='icd.who.int', port=443): Max retries exceeded with url: /browse10/2025/en/Download/GetICD10CSV (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1077)')))
+2025-12-01 15:17:58,622 - INFO - root -    Download attempt 3/3...
+2025-12-01 15:17:58,866 - WARNING - root -    Download attempt 3 failed: HTTPSConnectionPool(host='icd.who.int', port=443): Max retries exceeded with url: /browse10/2025/en/Download/GetICD10CSV (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1077)')))
+2025-12-01 15:17:58,866 - WARNING - root - ❌ ONLINE DOWNLOAD FAILED - All download attempts exhausted
+2025-12-01 15:17:58,867 - WARNING - root -    Last error: HTTPSConnectionPool(host='icd.who.int', port=443): Max retries exceeded with url: /browse10/2025/en/Download/GetICD10CSV (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1077)')))
+2025-12-01 15:17:58,867 - INFO - root -    Falling back to local file check...
+2025-12-01 15:17:58,868 - INFO - root - 🔍 Final check - File exists: True
+2025-12-01 15:17:58,868 - INFO - root - 📁 Using local file: /Users/tanveerkaur/medical-codexes-pipline/input/icd10who_codes_2024.csv
+2025-12-01 15:17:58,868 - INFO - root -    Source: LOCAL FILE (online download failed or unavailable)

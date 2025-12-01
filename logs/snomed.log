@@ -1,0 +1,40 @@
+2025-12-01 15:18:23,959 - INFO - root - ============================================================
+2025-12-01 15:18:23,959 - INFO - root - Starting SNOMED CT processor
+2025-12-01 15:18:23,959 - INFO - root - ============================================================
+2025-12-01 15:18:23,960 - INFO - root - 🔍 Checking file: /Users/tanveerkaur/medical-codexes-pipline/input/snomed_us_sample.csv
+2025-12-01 15:18:23,960 - INFO - root -    Absolute path: /Users/tanveerkaur/medical-codexes-pipline/input/snomed_us_sample.csv
+2025-12-01 15:18:23,960 - INFO - root -    File exists: False
+2025-12-01 15:18:23,960 - INFO - root - 🌐 Attempting online download first: /Users/tanveerkaur/medical-codexes-pipline/input/snomed_us_sample.csv
+2025-12-01 15:18:23,960 - INFO - root -    Source: HARDCODED URL
+2025-12-01 15:18:23,960 - INFO - root -    URL: https://download.nlm.nih.gov/umls/kss/snomedct_us/SnomedCT_US.zip
+2025-12-01 15:18:23,960 - INFO - root -    Download attempt 1/3...
+2025-12-01 15:18:24,327 - WARNING - root -    Download attempt 1 failed: File is not a zip file
+2025-12-01 15:18:24,327 - INFO - root -    Download attempt 2/3...
+2025-12-01 15:18:24,680 - WARNING - root -    Download attempt 2 failed: File is not a zip file
+2025-12-01 15:18:24,680 - INFO - root -    Download attempt 3/3...
+2025-12-01 15:18:25,040 - WARNING - root -    Download attempt 3 failed: File is not a zip file
+2025-12-01 15:18:25,040 - WARNING - root - ❌ ONLINE DOWNLOAD FAILED - All download attempts exhausted
+2025-12-01 15:18:25,040 - WARNING - root -    Last error: File is not a zip file
+2025-12-01 15:18:25,040 - INFO - root -    Falling back to local file check...
+2025-12-01 15:18:25,041 - INFO - root - 🔍 Final check - File exists: False
+2025-12-01 15:21:23,328 - INFO - root - ============================================================
+2025-12-01 15:21:23,329 - INFO - root - Starting SNOMED CT processor
+2025-12-01 15:21:23,329 - INFO - root - ============================================================
+2025-12-01 15:21:23,329 - INFO - root - 🔍 Checking file: /Users/tanveerkaur/medical-codexes-pipline/input/snomed_us_sample.csv
+2025-12-01 15:21:23,329 - INFO - root -    Absolute path: /Users/tanveerkaur/medical-codexes-pipline/input/snomed_us_sample.csv
+2025-12-01 15:21:23,329 - INFO - root -    File exists: True
+2025-12-01 15:21:23,329 - INFO - root - 🌐 Attempting online download first: /Users/tanveerkaur/medical-codexes-pipline/input/snomed_us_sample.csv
+2025-12-01 15:21:23,329 - INFO - root -    Source: HARDCODED URL
+2025-12-01 15:21:23,330 - INFO - root -    URL: https://download.nlm.nih.gov/umls/kss/snomedct_us/SnomedCT_US.zip
+2025-12-01 15:21:23,330 - INFO - root -    Download attempt 1/3...
+2025-12-01 15:21:23,928 - WARNING - root -    Download attempt 1 failed: File is not a zip file
+2025-12-01 15:21:23,928 - INFO - root -    Download attempt 2/3...
+2025-12-01 15:21:24,333 - WARNING - root -    Download attempt 2 failed: File is not a zip file
+2025-12-01 15:21:24,333 - INFO - root -    Download attempt 3/3...
+2025-12-01 15:21:24,719 - WARNING - root -    Download attempt 3 failed: File is not a zip file
+2025-12-01 15:21:24,719 - WARNING - root - ❌ ONLINE DOWNLOAD FAILED - All download attempts exhausted
+2025-12-01 15:21:24,719 - WARNING - root -    Last error: File is not a zip file
+2025-12-01 15:21:24,720 - INFO - root -    Falling back to local file check...
+2025-12-01 15:21:24,720 - INFO - root - 🔍 Final check - File exists: True
+2025-12-01 15:21:24,720 - INFO - root - 📁 Using local file: /Users/tanveerkaur/medical-codexes-pipline/input/snomed_us_sample.csv
+2025-12-01 15:21:24,720 - INFO - root -    Source: LOCAL FILE (online download failed or unavailable)

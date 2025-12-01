@@ -1,0 +1,21 @@
+2025-12-01 15:18:17,086 - INFO - root - ============================================================
+2025-12-01 15:18:17,086 - INFO - root - Starting RxNorm processor
+2025-12-01 15:18:17,086 - INFO - root - ============================================================
+2025-12-01 15:18:17,087 - INFO - root - 🔍 Checking file: /Users/tanveerkaur/medical-codexes-pipline/input/rxnorm_sample.csv
+2025-12-01 15:18:17,087 - INFO - root -    Absolute path: /Users/tanveerkaur/medical-codexes-pipline/input/rxnorm_sample.csv
+2025-12-01 15:18:17,087 - INFO - root -    File exists: True
+2025-12-01 15:18:17,087 - INFO - root - 🌐 Attempting online download first: /Users/tanveerkaur/medical-codexes-pipline/input/rxnorm_sample.csv
+2025-12-01 15:18:17,088 - INFO - root -    Source: HARDCODED URL
+2025-12-01 15:18:17,088 - INFO - root -    URL: https://download.nlm.nih.gov/umls/kss/rxnorm/RxNorm_full_current.zip
+2025-12-01 15:18:17,088 - INFO - root -    Download attempt 1/3...
+2025-12-01 15:18:17,775 - WARNING - root -    Download attempt 1 failed: File is not a zip file
+2025-12-01 15:18:17,776 - INFO - root -    Download attempt 2/3...
+2025-12-01 15:18:18,152 - WARNING - root -    Download attempt 2 failed: File is not a zip file
+2025-12-01 15:18:18,152 - INFO - root -    Download attempt 3/3...
+2025-12-01 15:18:18,550 - WARNING - root -    Download attempt 3 failed: File is not a zip file
+2025-12-01 15:18:18,550 - WARNING - root - ❌ ONLINE DOWNLOAD FAILED - All download attempts exhausted
+2025-12-01 15:18:18,550 - WARNING - root -    Last error: File is not a zip file
+2025-12-01 15:18:18,550 - INFO - root -    Falling back to local file check...
+2025-12-01 15:18:18,551 - INFO - root - 🔍 Final check - File exists: True
+2025-12-01 15:18:18,551 - INFO - root - 📁 Using local file: /Users/tanveerkaur/medical-codexes-pipline/input/rxnorm_sample.csv
+2025-12-01 15:18:18,551 - INFO - root -    Source: LOCAL FILE (online download failed or unavailable)

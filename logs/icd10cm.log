@@ -1,0 +1,24 @@
+2025-11-30 12:12:40,755 - INFO - root - ============================================================
+2025-11-30 12:12:40,755 - INFO - root - Starting ICD-10-CM processor
+2025-11-30 12:12:40,755 - INFO - root - ============================================================
+2025-12-01 15:17:35,110 - INFO - root - ============================================================
+2025-12-01 15:17:35,110 - INFO - root - Starting ICD-10-CM processor
+2025-12-01 15:17:35,110 - INFO - root - ============================================================
+2025-12-01 15:17:36,009 - INFO - root - 🔍 Checking file: /Users/tanveerkaur/medical-codexes-pipline/input/icd10cm_codes_2024.txt
+2025-12-01 15:17:36,009 - INFO - root -    Absolute path: /Users/tanveerkaur/medical-codexes-pipline/input/icd10cm_codes_2024.txt
+2025-12-01 15:17:36,009 - INFO - root -    File exists: True
+2025-12-01 15:17:36,009 - INFO - root - 🌐 Attempting online download first: /Users/tanveerkaur/medical-codexes-pipline/input/icd10cm_codes_2024.txt
+2025-12-01 15:17:36,009 - INFO - root -    Source: HARDCODED URL
+2025-12-01 15:17:36,009 - INFO - root -    URL: https://ftp.cdc.gov/pub/Health_Statistics/NCHS/Publications/ICD10CM/2025/icd10cm_codes_2025.txt
+2025-12-01 15:17:36,010 - INFO - root -    Download attempt 1/3...
+2025-12-01 15:17:36,310 - WARNING - root -    Download attempt 1 failed: 404 Client Error: Not Found for url: https://ftp.cdc.gov/pub/Health_Statistics/NCHS/Publications/ICD10CM/2025/icd10cm_codes_2025.txt
+2025-12-01 15:17:36,310 - INFO - root -    Download attempt 2/3...
+2025-12-01 15:17:36,792 - WARNING - root -    Download attempt 2 failed: 404 Client Error: Not Found for url: https://ftp.cdc.gov/pub/Health_Statistics/NCHS/Publications/ICD10CM/2025/icd10cm_codes_2025.txt
+2025-12-01 15:17:36,793 - INFO - root -    Download attempt 3/3...
+2025-12-01 15:17:37,322 - WARNING - root -    Download attempt 3 failed: 404 Client Error: Not Found for url: https://ftp.cdc.gov/pub/Health_Statistics/NCHS/Publications/ICD10CM/2025/icd10cm_codes_2025.txt
+2025-12-01 15:17:37,323 - WARNING - root - ❌ ONLINE DOWNLOAD FAILED - All download attempts exhausted
+2025-12-01 15:17:37,325 - WARNING - root -    Last error: 404 Client Error: Not Found for url: https://ftp.cdc.gov/pub/Health_Statistics/NCHS/Publications/ICD10CM/2025/icd10cm_codes_2025.txt
+2025-12-01 15:17:37,326 - INFO - root -    Falling back to local file check...
+2025-12-01 15:17:37,328 - INFO - root - 🔍 Final check - File exists: True
+2025-12-01 15:17:37,329 - INFO - root - 📁 Using local file: /Users/tanveerkaur/medical-codexes-pipline/input/icd10cm_codes_2024.txt
+2025-12-01 15:17:37,331 - INFO - root -    Source: LOCAL FILE (online download failed or unavailable)

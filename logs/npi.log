@@ -1,0 +1,10 @@
+2025-12-01 15:17:48,399 - INFO - root - ============================================================
+2025-12-01 15:17:48,399 - INFO - root - Starting NPI processor
+2025-12-01 15:17:48,399 - INFO - root - ============================================================
+2025-12-01 15:17:48,819 - INFO - root - 🔍 Checking file: /Users/tanveerkaur/medical-codexes-pipline/input/npi_registry.csv
+2025-12-01 15:17:48,819 - INFO - root -    Absolute path: /Users/tanveerkaur/medical-codexes-pipline/input/npi_registry.csv
+2025-12-01 15:17:48,819 - INFO - root -    File exists: True
+2025-12-01 15:17:48,819 - INFO - root - 📁 URL resolution failed (could not find valid URL), checking for local file: /Users/tanveerkaur/medical-codexes-pipline/input/npi_registry.csv
+2025-12-01 15:17:48,820 - INFO - root - 🔍 Final check - File exists: True
+2025-12-01 15:17:48,820 - INFO - root - 📁 Using local file: /Users/tanveerkaur/medical-codexes-pipline/input/npi_registry.csv
+2025-12-01 15:17:48,820 - INFO - root -    Source: LOCAL FILE (online download failed or unavailable)

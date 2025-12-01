@@ -1,0 +1,43 @@
+2025-11-30 12:18:28,448 - INFO - root - ============================================================
+2025-11-30 12:18:28,448 - INFO - root - Starting HCPCS processor
+2025-11-30 12:18:28,448 - INFO - root - ============================================================
+2025-12-01 15:14:27,168 - INFO - root - ============================================================
+2025-12-01 15:14:27,170 - INFO - root - Starting HCPCS processor
+2025-12-01 15:14:27,170 - INFO - root - ============================================================
+2025-12-01 15:14:28,776 - INFO - root - 🔍 Checking file: /Users/tanveerkaur/medical-codexes-pipline/input/hcpcs_codes_2024.csv
+2025-12-01 15:14:28,776 - INFO - root -    Absolute path: /Users/tanveerkaur/medical-codexes-pipline/input/hcpcs_codes_2024.csv
+2025-12-01 15:14:28,776 - INFO - root -    File exists: False
+2025-12-01 15:14:28,777 - INFO - root - 🌐 Attempting online download first: /Users/tanveerkaur/medical-codexes-pipline/input/hcpcs_codes_2024.csv
+2025-12-01 15:14:28,777 - INFO - root -    Source: HARDCODED URL
+2025-12-01 15:14:28,777 - INFO - root -    URL: https://www.cms.gov/files/zip/2025-alpha-numeric-hcpcs-file.zip
+2025-12-01 15:14:28,779 - INFO - root -    Download attempt 1/3...
+2025-12-01 15:14:29,373 - WARNING - root -    Download attempt 1 failed: 404 Client Error: Not Found for url: https://www.cms.gov/files/zip/2025-alpha-numeric-hcpcs-file.zip
+2025-12-01 15:14:29,375 - INFO - root -    Download attempt 2/3...
+2025-12-01 15:14:30,120 - WARNING - root -    Download attempt 2 failed: 404 Client Error: Not Found for url: https://www.cms.gov/files/zip/2025-alpha-numeric-hcpcs-file.zip
+2025-12-01 15:14:30,120 - INFO - root -    Download attempt 3/3...
+2025-12-01 15:14:31,001 - WARNING - root -    Download attempt 3 failed: 404 Client Error: Not Found for url: https://www.cms.gov/files/zip/2025-alpha-numeric-hcpcs-file.zip
+2025-12-01 15:14:31,002 - WARNING - root - ❌ ONLINE DOWNLOAD FAILED - All download attempts exhausted
+2025-12-01 15:14:31,002 - WARNING - root -    Last error: 404 Client Error: Not Found for url: https://www.cms.gov/files/zip/2025-alpha-numeric-hcpcs-file.zip
+2025-12-01 15:14:31,002 - INFO - root -    Falling back to local file check...
+2025-12-01 15:14:31,002 - INFO - root - 🔍 Final check - File exists: False
+2025-12-01 15:15:53,467 - INFO - root - ============================================================
+2025-12-01 15:15:53,468 - INFO - root - Starting HCPCS processor
+2025-12-01 15:15:53,468 - INFO - root - ============================================================
+2025-12-01 15:15:54,469 - INFO - root - 🔍 Checking file: /Users/tanveerkaur/medical-codexes-pipline/input/hcpcs_codes_2024.csv
+2025-12-01 15:15:54,470 - INFO - root -    Absolute path: /Users/tanveerkaur/medical-codexes-pipline/input/hcpcs_codes_2024.csv
+2025-12-01 15:15:54,470 - INFO - root -    File exists: True
+2025-12-01 15:15:54,470 - INFO - root - 🌐 Attempting online download first: /Users/tanveerkaur/medical-codexes-pipline/input/hcpcs_codes_2024.csv
+2025-12-01 15:15:54,470 - INFO - root -    Source: HARDCODED URL
+2025-12-01 15:15:54,471 - INFO - root -    URL: https://www.cms.gov/files/zip/2025-alpha-numeric-hcpcs-file.zip
+2025-12-01 15:15:54,471 - INFO - root -    Download attempt 1/3...
+2025-12-01 15:15:54,840 - WARNING - root -    Download attempt 1 failed: 404 Client Error: Not Found for url: https://www.cms.gov/files/zip/2025-alpha-numeric-hcpcs-file.zip
+2025-12-01 15:15:54,841 - INFO - root -    Download attempt 2/3...
+2025-12-01 15:15:55,207 - WARNING - root -    Download attempt 2 failed: 404 Client Error: Not Found for url: https://www.cms.gov/files/zip/2025-alpha-numeric-hcpcs-file.zip
+2025-12-01 15:15:55,207 - INFO - root -    Download attempt 3/3...
+2025-12-01 15:15:55,607 - WARNING - root -    Download attempt 3 failed: 404 Client Error: Not Found for url: https://www.cms.gov/files/zip/2025-alpha-numeric-hcpcs-file.zip
+2025-12-01 15:15:55,607 - WARNING - root - ❌ ONLINE DOWNLOAD FAILED - All download attempts exhausted
+2025-12-01 15:15:55,608 - WARNING - root -    Last error: 404 Client Error: Not Found for url: https://www.cms.gov/files/zip/2025-alpha-numeric-hcpcs-file.zip
+2025-12-01 15:15:55,608 - INFO - root -    Falling back to local file check...
+2025-12-01 15:15:55,608 - INFO - root - 🔍 Final check - File exists: True
+2025-12-01 15:15:55,608 - INFO - root - 📁 Using local file: /Users/tanveerkaur/medical-codexes-pipline/input/hcpcs_codes_2024.csv
+2025-12-01 15:15:55,608 - INFO - root -    Source: LOCAL FILE (online download failed or unavailable)

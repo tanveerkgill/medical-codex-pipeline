@@ -1,0 +1,16 @@
+# Python
+__pycache__/
+*.pyc
+.env
+venv/
+
+# IDE
+.vscode/
+.idea/
+
+# Raw data files
+input/
+*.txt
+*.csv
+*.zip
+raw_downloads/
