@@ -33,6 +33,7 @@ RAW_FILE = INPUT_DIR / "npi_registry.csv"
 NPI_10_DIGITS = re.compile(r"^\d{10}$")
 
 def luhn_check_digit(number_without_check: str) -> int:
+    """Compute Luhn check digit for the supplied number string."""
     digits = [int(ch) for ch in number_without_check]
     total = 0
     parity = (len(digits) + 1) % 2
@@ -46,6 +47,7 @@ def luhn_check_digit(number_without_check: str) -> int:
 
 
 def is_valid_npi(npi_str: str) -> bool:
+    """Return True if the supplied string is a valid 10-digit NPI."""
     if not isinstance(npi_str, str):
         return False
     digits = re.sub(r"\D", "", npi_str)
@@ -57,6 +59,7 @@ def is_valid_npi(npi_str: str) -> bool:
 
 
 def find_column(candidates: List[str], columns: List[str]) -> Optional[str]:
+    """Return the first column matching candidate names (case-insensitive)."""
     lower_map = {c.lower(): c for c in columns}
     for cand in candidates:
         found = lower_map.get(cand.lower())
@@ -66,6 +69,7 @@ def find_column(candidates: List[str], columns: List[str]) -> Optional[str]:
 
 
 def build_description(df: pd.DataFrame) -> pd.Series:
+    """Compose a human readable NPI description using org or individual fields."""
     org_candidates = [
         "Provider Organization Name (Legal Business Name)",
         "Provider Organization Name",
@@ -101,6 +105,7 @@ def build_description(df: pd.DataFrame) -> pd.Series:
     return pd.Series([""] * len(df))
 
 def validate_npi_data(df: pd.DataFrame) -> Tuple[pd.DataFrame, pd.DataFrame, str]:
+    """Validate NPI numbers (length + Luhn) and return clean/invalid subsets."""
     npi_col = find_column(["NPI", "npi"], list(df.columns))
     if not npi_col:
         raise ValueError("Missing required column: NPI")
@@ -116,6 +121,7 @@ def validate_npi_data(df: pd.DataFrame) -> Tuple[pd.DataFrame, pd.DataFrame, str
 
 
 def clean_npi_data(df: pd.DataFrame, npi_col: str) -> pd.DataFrame:
+    """Standardize NPI data into the shared output schema."""
     df = df.copy()
     df["description"] = build_description(df)
     df = df.rename(columns={npi_col: "code"})
@@ -129,6 +135,7 @@ def clean_npi_data(df: pd.DataFrame, npi_col: str) -> pd.DataFrame:
     return df[["code", "description", "last_updated"]]
 
 def main():
+    """Process NPI data from CSV/ZIP into standardized CSV output."""
     setup_logging(LOG_DIR / "npi.log")
     logging.info("=" * 60)
     logging.info("Starting NPI processor")
@@ -144,10 +151,17 @@ def main():
     )
     raw_df = pd.read_csv(raw_path, dtype=str, on_bad_lines="warn", low_memory=False)
     valid_df, invalid_df, npi_col = validate_npi_data(raw_df)
-    if not invalid_df.empty:
+    invalid_count = len(invalid_df)
+    if invalid_count:
+        logging.warning("NPI: %d invalid rows detected", invalid_count)
         save_invalid_rows(invalid_df, ERROR_DIR / "npi_invalid")
+    else:
+        logging.info("NPI: no invalid rows detected")
     clean_df = clean_npi_data(valid_df, npi_col=npi_col)
-    save_to_formats(clean_df, OUTPUT_CSV_DIR / "npi_clean")
+    output_base = OUTPUT_CSV_DIR / "npi_clean"
+    output_csv = output_base.with_suffix(".csv")
+    logging.info("NPI: saving %d clean rows to %s", len(clean_df), output_csv)
+    save_to_formats(clean_df, output_base)
     print("✅ NPI processing completed")
 
 

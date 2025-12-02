@@ -36,6 +36,7 @@ HCPCS_PATTERN = re.compile(r"^[A-V]\d{4}$")
 
 
 def find_column(candidates: List[str], columns: List[str]) -> Optional[str]:
+    """Return the first column matching candidate names (case-insensitive)."""
     lower_map = {c.lower(): c for c in columns}
     for cand in candidates:
         found = lower_map.get(cand.lower())
@@ -45,6 +46,7 @@ def find_column(candidates: List[str], columns: List[str]) -> Optional[str]:
 
 
 def validate_hcpcs_data(df: pd.DataFrame) -> Tuple[pd.DataFrame, pd.DataFrame, str, str]:
+    """Validate HCPCS codes and locate description column."""
     code_col = find_column(["HCPCS", "Code", "code"], list(df.columns))
     if not code_col:
         raise ValueError("Missing required column: HCPCS/Code")
@@ -66,6 +68,7 @@ def validate_hcpcs_data(df: pd.DataFrame) -> Tuple[pd.DataFrame, pd.DataFrame, s
 
 
 def clean_hcpcs_data(df: pd.DataFrame, code_col: str, desc_col: str) -> pd.DataFrame:
+    """Standardize HCPCS output columns and metadata."""
     df = df.rename(columns={code_col: "code", desc_col: "description"})
     df = basic_cleanup(df)
     df = df.dropna(subset=["code", "description"]).drop_duplicates(subset=["code"])
@@ -74,6 +77,7 @@ def clean_hcpcs_data(df: pd.DataFrame, code_col: str, desc_col: str) -> pd.DataF
 
 
 def main():
+    """Entry point for HCPCS processing pipeline."""
     setup_logging(LOG_DIR / "hcpcs.log")
     logging.info("=" * 60)
     logging.info("Starting HCPCS processor")
@@ -91,14 +95,20 @@ def main():
     raw_df = pd.read_csv(raw_path, dtype=str, sep=sep, on_bad_lines="warn", low_memory=False)
 
     valid_df, invalid_df, code_col, desc_col = validate_hcpcs_data(raw_df)
-    if not invalid_df.empty:
+    invalid_count = len(invalid_df)
+    if invalid_count:
+        logging.warning("HCPCS: %d invalid rows detected", invalid_count)
         save_invalid_rows(invalid_df, ERROR_DIR / "hcpcs_invalid")
+    else:
+        logging.info("HCPCS: no invalid rows detected")
 
     clean_df = clean_hcpcs_data(valid_df, code_col=code_col, desc_col=desc_col)
-    save_to_formats(clean_df, OUTPUT_CSV_DIR / "hcpcs_clean")
+    output_base = OUTPUT_CSV_DIR / "hcpcs_clean"
+    output_csv = output_base.with_suffix(".csv")
+    logging.info("HCPCS: saving %d clean rows to %s", len(clean_df), output_csv)
+    save_to_formats(clean_df, output_base)
     print("✅ HCPCS processing completed")
 
 
 if __name__ == "__main__":
     main()
-

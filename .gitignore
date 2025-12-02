@@ -11,6 +11,9 @@ venv/
 # Raw data files
 input/
 *.txt
-*.csv
+*.xml
 *.zip
 raw_downloads/
+
+# Keep processed outputs in version control
+!output/csv/

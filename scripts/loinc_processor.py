@@ -35,6 +35,7 @@ LOINC_PATTERN = re.compile(r"^[0-9]{1,5}-[0-9]$")
 
 
 def find_column(candidates: List[str], columns: List[str]) -> Optional[str]:
+    """Return the first column matching candidate names (case-insensitive)."""
     lower_map = {c.lower(): c for c in columns}
     for cand in candidates:
         found = lower_map.get(cand.lower())
@@ -44,6 +45,7 @@ def find_column(candidates: List[str], columns: List[str]) -> Optional[str]:
 
 
 def validate_loinc_data(df: pd.DataFrame) -> Tuple[pd.DataFrame, pd.DataFrame, str, str]:
+    """Validate LOINC codes and locate description column."""
     code_col = find_column(["LOINC_NUM", "LoincNum", "code"], list(df.columns))
     if not code_col:
         raise ValueError("Missing required column: LOINC_NUM")
@@ -65,6 +67,7 @@ def validate_loinc_data(df: pd.DataFrame) -> Tuple[pd.DataFrame, pd.DataFrame, s
 
 
 def clean_loinc_data(df: pd.DataFrame, code_col: str, desc_col: str) -> pd.DataFrame:
+    """Standardize LOINC output columns and metadata."""
     df = df.rename(columns={code_col: "code", desc_col: "description"})
     df = basic_cleanup(df)
     df = df.dropna(subset=["code", "description"]).drop_duplicates(subset=["code"])
@@ -73,9 +76,7 @@ def clean_loinc_data(df: pd.DataFrame, code_col: str, desc_col: str) -> pd.DataF
 
 
 def main():
-    """
-    Process LOINC into standardized CSV. Default expects a simple sample CSV unless LOINC_URL is set.
-    """
+    """Process LOINC data into standardized CSV output."""
     setup_logging(LOG_DIR / "loinc.log")
     logging.info("=" * 60)
     logging.info("Starting LOINC processor")
@@ -90,15 +91,20 @@ def main():
     raw_df = pd.read_csv(raw_path, dtype=str, on_bad_lines="warn", low_memory=False)
 
     valid_df, invalid_df, code_col, desc_col = validate_loinc_data(raw_df)
-    if not invalid_df.empty:
+    invalid_count = len(invalid_df)
+    if invalid_count:
+        logging.warning("LOINC: %d invalid rows detected", invalid_count)
         save_invalid_rows(invalid_df, ERROR_DIR / "loinc_invalid")
+    else:
+        logging.info("LOINC: no invalid rows detected")
 
     clean_df = clean_loinc_data(valid_df, code_col=code_col, desc_col=desc_col)
-    save_to_formats(clean_df, OUTPUT_CSV_DIR / "loinc_clean")
+    output_base = OUTPUT_CSV_DIR / "loinc_clean"
+    output_csv = output_base.with_suffix(".csv")
+    logging.info("LOINC: saving %d clean rows to %s", len(clean_df), output_csv)
+    save_to_formats(clean_df, output_base)
     print("✅ LOINC processing completed")
 
 
 if __name__ == "__main__":
     main()
-
-

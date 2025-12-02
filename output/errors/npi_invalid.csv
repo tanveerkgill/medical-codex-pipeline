@@ -1,0 +1,7 @@
+NPI,Provider Organization Name (Legal Business Name),Provider Last Name (Legal Name),Provider First Name,Provider Middle Name,Provider Credential Text
+1987654329,,SMITH,JOHN,DAVID,MD
+1122334451,,JONES,MARY,,RN
+2233445567,Community Health Center,,,,
+9999999999,Invalid NPI Check Digit,,,,
+12345,Too Short,,,,
+,Missing NPI,Test Clinic,,,

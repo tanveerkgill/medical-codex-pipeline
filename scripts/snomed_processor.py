@@ -36,6 +36,7 @@ SNOMED_SCTID_PATTERN = re.compile(r"^\d{6,18}$")
 
 
 def find_column(candidates: List[str], columns: List[str]) -> Optional[str]:
+    """Return the first column matching candidate names (case-insensitive)."""
     lower_map = {c.lower(): c for c in columns}
     for cand in candidates:
         found = lower_map.get(cand.lower())
@@ -45,9 +46,7 @@ def find_column(candidates: List[str], columns: List[str]) -> Optional[str]:
 
 
 def validate_snomed_data(df: pd.DataFrame) -> Tuple[pd.DataFrame, pd.DataFrame, str, str]:
-    """
-    Validate presence of code/description-like columns and basic SCTID format.
-    """
+    """Validate SNOMED SCTIDs and locate description column."""
     code_col = find_column(["conceptId", "Concept ID", "id", "code", "sctid"], list(df.columns))
     if not code_col:
         raise ValueError("Missing required column for SNOMED concept identifier (e.g., conceptId)")
@@ -77,9 +76,7 @@ def validate_snomed_data(df: pd.DataFrame) -> Tuple[pd.DataFrame, pd.DataFrame, 
 
 
 def clean_snomed_data(df: pd.DataFrame, code_col: str, desc_col: str) -> pd.DataFrame:
-    """
-    Standardize to code, description, last_updated.
-    """
+    """Standardize SNOMED output columns and metadata."""
     df = df.rename(columns={code_col: "code", desc_col: "description"})
     df = basic_cleanup(df)
     df = df.dropna(subset=["code", "description"]).drop_duplicates(subset=["code"])
@@ -88,9 +85,7 @@ def clean_snomed_data(df: pd.DataFrame, code_col: str, desc_col: str) -> pd.Data
 
 
 def main():
-    """
-    Process SNOMED CT sample (or remote via SNOMED_URL) into standardized CSV.
-    """
+    """Process SNOMED CT sample (or remote via SNOMED_URL) into standardized CSV."""
     setup_logging(LOG_DIR / "snomed.log")
     logging.info("=" * 60)
     logging.info("Starting SNOMED CT processor")
@@ -105,14 +100,20 @@ def main():
     raw_df = pd.read_csv(raw_path, dtype=str, on_bad_lines="warn", low_memory=False)
 
     valid_df, invalid_df, code_col, desc_col = validate_snomed_data(raw_df)
-    if not invalid_df.empty:
+    invalid_count = len(invalid_df)
+    if invalid_count:
+        logging.warning("SNOMED: %d invalid rows detected", invalid_count)
         save_invalid_rows(invalid_df, ERROR_DIR / "snomed_invalid")
+    else:
+        logging.info("SNOMED: no invalid rows detected")
 
     clean_df = clean_snomed_data(valid_df, code_col=code_col, desc_col=desc_col)
-    save_to_formats(clean_df, OUTPUT_CSV_DIR / "snomed_clean")
+    output_base = OUTPUT_CSV_DIR / "snomed_clean"
+    output_csv = output_base.with_suffix(".csv")
+    logging.info("SNOMED: saving %d clean rows to %s", len(clean_df), output_csv)
+    save_to_formats(clean_df, output_base)
     print("✅ SNOMED processing completed")
 
 
 if __name__ == "__main__":
     main()
-

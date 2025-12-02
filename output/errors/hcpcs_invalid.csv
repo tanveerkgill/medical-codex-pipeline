@@ -1,0 +1,6 @@
+HCPCS,Long Description
+12345,Invalid: missing leading letter
+W1234,Invalid: unsupported letter (outside A–V)
+A123,Invalid: too short
+A12345,Invalid: too long
+NAN,Missing code

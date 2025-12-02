@@ -36,6 +36,7 @@ ICD10CM_PATTERN = re.compile(r"^[A-Z][0-9]{2}(\.[0-9A-Z]{1,4})?$")
 
 
 def find_column(candidates: List[str], columns: List[str]) -> Optional[str]:
+    """Return the first matching column from a list of case-insensitive candidates."""
     lower_map = {c.lower(): c for c in columns}
     for cand in candidates:
         found = lower_map.get(cand.lower())
@@ -45,6 +46,7 @@ def find_column(candidates: List[str], columns: List[str]) -> Optional[str]:
 
 
 def validate_icd10cm_data(df: pd.DataFrame) -> Tuple[pd.DataFrame, pd.DataFrame, str, str]:
+    """Validate ICD-10-CM codes and locate description columns."""
     code_col = find_column(["Code", "code"], list(df.columns))
     if not code_col:
         raise ValueError("Missing required column: Code")
@@ -67,6 +69,7 @@ def validate_icd10cm_data(df: pd.DataFrame) -> Tuple[pd.DataFrame, pd.DataFrame,
 
 
 def clean_icd10cm_data(df: pd.DataFrame, code_col: str, desc_col: str) -> pd.DataFrame:
+    """Standardize ICD-10-CM output columns and metadata."""
     df = df.rename(columns={code_col: "code", desc_col: "description"})
     df = basic_cleanup(df)
     df = df.dropna(subset=["code", "description"]).drop_duplicates(subset=["code"])
@@ -75,6 +78,7 @@ def clean_icd10cm_data(df: pd.DataFrame, code_col: str, desc_col: str) -> pd.Dat
 
 
 def main():
+    """Entry point for ICD-10-CM processing pipeline."""
     setup_logging(LOG_DIR / "icd10cm.log")
     logging.info("=" * 60)
     logging.info("Starting ICD-10-CM processor")
@@ -91,14 +95,20 @@ def main():
     raw_df = pd.read_csv(raw_path, dtype=str, sep='\t', on_bad_lines="warn", low_memory=False)
 
     valid_df, invalid_df, code_col, desc_col = validate_icd10cm_data(raw_df)
-    if not invalid_df.empty:
+    invalid_count = len(invalid_df)
+    if invalid_count:
+        logging.warning("ICD-10-CM: %d invalid rows detected", invalid_count)
         save_invalid_rows(invalid_df, ERROR_DIR / "icd10cm_invalid")
+    else:
+        logging.info("ICD-10-CM: no invalid rows detected")
 
     clean_df = clean_icd10cm_data(valid_df, code_col=code_col, desc_col=desc_col)
-    save_to_formats(clean_df, OUTPUT_CSV_DIR / "icd10cm_clean")
+    output_base = OUTPUT_CSV_DIR / "icd10cm_clean"
+    output_csv = output_base.with_suffix(".csv")
+    logging.info("ICD-10-CM: saving %d clean rows to %s", len(clean_df), output_csv)
+    save_to_formats(clean_df, output_base)
     print("✅ ICD-10-CM processing completed")
 
 
 if __name__ == "__main__":
     main()
-
