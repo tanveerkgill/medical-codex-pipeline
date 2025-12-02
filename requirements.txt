@@ -1,0 +1,7 @@
+polars
+pandas
+requests
+scipy
+numpy
+matplotlib
+time
